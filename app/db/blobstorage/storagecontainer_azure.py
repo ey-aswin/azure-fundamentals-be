@@ -7,14 +7,14 @@ contianer = ContainerClient.from_connection_string(
 )
 
 
-class BlobStorageAzureContainer: 
+class BlobStorageAzureContainer:
     def __init__(self):
         self.container_client = contianer 
 
     def get_blob_url_with_sas(self, blob_name):
         account_name="aswinstorageblob"
         container_name="blobimages"
-        account_key=Config.BLOB_STORAGE_ACCOUNT_KEY  # Replace with your actual account key
+        account_key=Config.BLOB_STORAGE_KEY  # Replace with your actual account key
         sas_token = generate_blob_sas(
         account_name=account_name,
         container_name=container_name,

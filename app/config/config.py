@@ -17,6 +17,7 @@ class Config:
     CORS_HOSTS = os.getenv("CORS_HOSTS", "").split(",")
     BLOB_STORAGE_CONNECTION_STRING = os.getenv("BLOB_STORAGE_CONNECTION_STRING", "")
     BLOB_CONTAINER_NAME = os.getenv("BLOB_STORAGE_CONTAINER_NAME", "")
+    BLOB_STORAGE_KEY = os.getenv("BLOB_STORAGE_KEY", "")
             
 
 
