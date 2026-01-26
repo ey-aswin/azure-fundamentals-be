@@ -14,9 +14,9 @@ def project_status(
 ):
     items = project_container_service.create_item(bodyData.model_dump())
 
-    try:
+    try: 
         httpx.get(
-            config.Config.FUNCTION_URL + "/api/emailtrigger?todo_id="+items["id"]  ,timeout=30      ) 
+            config.Config.FUNCTION_URL + "/api/emailtrigger"  ,timeout=30 ,params={"todo_id": items["id"]}     ) 
         # return "success"
     except Exception as exc:
         print(f"An error occurred while requesting search service: {exc}")
