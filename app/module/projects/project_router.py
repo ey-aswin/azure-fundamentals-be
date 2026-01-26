@@ -17,7 +17,7 @@ def project_status(
     try:
         httpx.get(
             config.Config.FUNCTION_URL + "/api/emailtrigger?todo_id="+items["id"]  ,timeout=30      ) 
-        return "success"
+        # return "success"
     except Exception as exc:
         print(f"An error occurred while requesting search service: {exc}")
         print("Exception repr:", repr(exc))
