@@ -1,9 +1,11 @@
 from fastapi import APIRouter, Depends
 from app.db.cosmosdb.containers.projectContainer import get_project_container
 from app.module.projects.project_schema import ProjectCreateSchema,ProjectEditSchema
+import httpx
+from app.config import config
 
 router = APIRouter(prefix="/project", tags=["project"])
-
+ 
 
 @router.post("/create")
 def project_status(
@@ -11,6 +13,15 @@ def project_status(
     project_container_service=Depends(get_project_container),
 ):
     items = project_container_service.create_item(bodyData.model_dump())
+
+    try:
+        httpx.get(
+            config.Config.FUNCTION_URL + "/api/emailtrigger?todo_id="+items["id"]  ,timeout=30      ) 
+        return "success"
+    except Exception as exc:
+        print(f"An error occurred while requesting search service: {exc}")
+        print("Exception repr:", repr(exc))
+    
     return {"status": "successfully inserted", "items": items}
 
 
